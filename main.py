@@ -55,7 +55,7 @@ def predict_sepsis_endpoint(data: PatientData):
         sepsis_explanation = "Sepsis is a life-threatening condition. A positive prediction suggests that the patient might be exhibiting sepsis symptoms and requires immediate medical attention."
     else:
         status_icon = "✘"
-        sepsis_explanation = "Sepsis is a life-threatening condition caused by an infection. A negative prediction suggests that the patient is not currently exhibiting sepsis symptoms."
+        sepsis_explanation = "Sepsis is a life-threatening condition. A negative prediction suggests that the patient is not currently exhibiting sepsis symptoms."
 
     statement = f"The patient's sepsis status is {sepsis_status} {status_icon} with a probability of {probability:.2f}. {sepsis_explanation}"
 
