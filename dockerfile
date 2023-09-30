@@ -1,9 +1,9 @@
-FROM python:3.8
+FROM python:3.11
 
 
-ADD main.py .
+ADD app.py .
 
-RUN pip install requests beutifylsoup4
+# RUN pip install requests beutifylsoup4
 
-CMD [ "python", "./main.py" ]
+CMD [ "python", "./app.py", "daemon of" ]
 

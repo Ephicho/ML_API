@@ -9,9 +9,9 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 # Load the numerical imputer, scaler, and model
-num_imputer_filepath = "/com.docker.devenvironments.code/project_directory/ML components/numerical_imputer.joblib"
-scaler_filepath = "/com.docker.devenvironments.code/project_directory/ML components/scaler.joblib"
-model_filepath = "/com.docker.devenvironments.code/project_directory/ML components/rf_model.joblib"
+num_imputer_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/numerical_imputer.joblib"
+scaler_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/scaler.joblib"
+model_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/rf_model.joblib"
 
 num_imputer = joblib.load(num_imputer_filepath)
 scaler = joblib.load(scaler_filepath)
@@ -52,7 +52,7 @@ def predict_sepsis_endpoint(data: PatientData):
 
     if prediction == 1:
         status_icon = "✔"
-        sepsis_explanation = "Sepsis is a life-threatening condition caused by an infection. A positive prediction suggests that the patient might be exhibiting sepsis symptoms and requires immediate medical attention."
+        sepsis_explanation = "Sepsis is a life-threatening condition. A positive prediction suggests that the patient might be exhibiting sepsis symptoms and requires immediate medical attention."
     else:
         status_icon = "✘"
         sepsis_explanation = "Sepsis is a life-threatening condition caused by an infection. A negative prediction suggests that the patient is not currently exhibiting sepsis symptoms."
@@ -64,7 +64,7 @@ def predict_sepsis_endpoint(data: PatientData):
 
     result = {'predicted_sepsis': sepsis_status, 'statement': statement, 'user_input_statement': user_input_statement, 'input_data_df': output_df.to_dict('records')}
     return result
-if __name__ == "__main__":
-    import uvicorn
+# if __name__ == "__main__":
+#     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+#     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

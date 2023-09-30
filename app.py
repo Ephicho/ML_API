@@ -5,16 +5,16 @@ import matplotlib.pyplot as plt
 import time
 import os 
 
-# Load the numerical imputer
-num_imputer_filepath = "D:/Projects/Sepsis Classification/ML components/numerical_imputer.joblib"
+###Load the numerical imputer
+num_imputer_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/numerical_imputer.joblib"
 num_imputer = joblib.load(num_imputer_filepath)
 
-# Load the scaler
-scaler_filepath = "D:/Projects/Sepsis Classification/ML components/scaler.joblib"
+## Load the scaler
+scaler_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/scaler.joblib"
 scaler = joblib.load(scaler_filepath)
 
-# Load the Random Forest model
-model_filepath = "D:/Projects/Sepsis Classification/ML components/rf_model.joblib"
+# # Load the Random Forest model
+model_filepath = "D:/2015/azubi_afrtica/ML_API_FastAPI/ML_API/rf_model.joblib"
 model = joblib.load(model_filepath)
 
 # Define a function to preprocess the input data
@@ -42,32 +42,22 @@ def predict_sepsis(input_data):
     return output_df, probabilities
 
 # Create a Streamlit app
-# Create a Streamlit app
 def main():
-    st.title('Sepsis Prediction App')
-
-    # Display the image using HTML
-    image_url = "https://lh3.googleusercontent.com/-UU_-cM2FZnI/YLgc3z-EFCI/AAAAAAAAAuo/sORie7aJNgsM8UY7_qAUTZUSeSxKtA7UQCLcBGAsYHQ/s16000/streamlit_log.png"
-    st.markdown(f'<img src="{image_url}" alt="Streamlit Logo" style="width: 300px;">', unsafe_allow_html=True)
+    st.title('Sepsis Prediction Application')
 
 
     # How to use
     st.sidebar.title('How to Use')
     st.sidebar.markdown('Follow these steps to predict sepsis:')
-    st.sidebar.markdown('1. Enter the patient\'s medical data on the left sidebar.')
-    st.sidebar.markdown('2. Click the "Predict" button to analyze the patient\'s condition.')
-    st.sidebar.markdown('3. Wait for the app to process the information.')
-    st.sidebar.markdown('4. View the prediction result and the likelihood of sepsis.')
-    st.sidebar.markdown('5. Interpret the result: "Positive" indicates sepsis, and "Negative" means no sepsis.')
-    st.sidebar.markdown('6. Check the probability bars for the likelihood of sepsis.')
-    #st.sidebar.markdown('7. If feature importance is available, view the impact of each input on the prediction.')
+    
   
-    st.sidebar.title('Input Parameters')
+    st.sidebar.title('Parameters')
 
     # Input parameter explanations
 
     # Plasma Glucose - Slider
     st.sidebar.markdown('**PRG:** Plasma Glucose')
+    
     PRG = st.sidebar.slider('PRG', min_value=0.0, max_value=200.0, value=100.0)
 
     # Blood Work Result 1 - Text Input
@@ -99,14 +89,14 @@ def main():
     Age = st.sidebar.slider('Age', min_value=0, max_value=120, value=30)
 
     # Insurance - Radio Buttons
-    st.sidebar.markdown('**Insurance:** Does the patient have Insurance?')
+    st.sidebar.markdown('**Insurance:** Does you have Insurance?')
     insurance_options = {0: 'NO', 1: 'YES'}
     Insurance = st.sidebar.radio('Insurance', list(insurance_options.keys()), format_func=lambda x: insurance_options[x])
 
     input_data = [[PRG, PL, PR, SK, TS, M11, BD2, Age, Insurance]]
 
     if st.sidebar.button('Predict'):
-        with st.spinner("Predicting..."):
+        with st.spinner("Wait a moment..."):
             # Simulate a long-running process
             progress_bar = st.progress(0)
             for i in range(100):
@@ -115,15 +105,16 @@ def main():
 
             output_df, probabilities = predict_sepsis(input_data)
 
-            st.subheader('Prediction Result')
+            st.subheader('Result')
             st.write(output_df)
 
-            # Plot the probabilities as a pie chart with black and red colors
+            # Plot the probabilities as a pie chart 
             fig, ax = plt.subplots()
-            colors = ['#FF0000', '#000000']  # Red and Black colors
+            colors = ['#FF0000', '#008000']  
             ax.pie(probabilities, labels=['Negative', 'Positive'], autopct='%1.1f%%', startangle=90, colors=colors)
             ax.set_title('Sepsis Prediction Probabilities')
             st.pyplot(fig)
+            st.snow()
                           
 if __name__ == '__main__':
     main()
