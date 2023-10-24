@@ -115,6 +115,3 @@ def main():
             ax.set_title('Sepsis Prediction Probabilities')
             st.pyplot(fig)
             st.snow()
-                          
-if __name__ == '__main__':
-    main()

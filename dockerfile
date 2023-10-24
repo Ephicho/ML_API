@@ -1,9 +1,18 @@
 FROM python:3.11
 
+WORKDIR /app
 
-ADD app.py .
+COPY . /app/
 
-# RUN pip install requests beutifylsoup4
+ #Install depndencies 
+RUN pip install -r requriment.txt
 
-CMD [ "python", "./app.py", "daemon of" ]
+COPY . .
+
+#Expose the port that the application will be running
+EXPOSE 8000
+
+#Run the application
+
+CMD [ "uvicorn", "./main:app", "daemon of" ]
 
